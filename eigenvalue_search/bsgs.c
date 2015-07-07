@@ -1,7 +1,9 @@
-/*incremental computation of multiples of a point*/
-/*returns a vector containing n numerators and denominators of the point multiples*/
+#include "bsgs.h"
 
-static GEN
+/*incremental computation of multiples of a point*/
+/*returns a vector containing numerators and denominators of the point multiples*/
+
+GEN
 compute_multiples(ulong n,GEN a4, GEN a6, GEN fl, GEN p)
 {
   pari_sp ltop = avma;
@@ -62,7 +64,7 @@ compute_multiples(ulong n,GEN a4, GEN a6, GEN fl, GEN p)
 /************* Modular composition :returns g(h) mod f  **************/
 /* assumes that g,h,f are FpX's and  deg(f)>deg(g) deg(f)>deg(h) */
 
-static GEN
+GEN
 mod_compose(GEN g, GEN h, GEN *eT,ulong n, GEN p)
 {
   /*pari_sp ltop = avma;*/
@@ -95,13 +97,12 @@ mod_compose(GEN g, GEN h, GEN *eT,ulong n, GEN p)
 
 /* mod_transp computes tau o v ie the transpose of the matrix  */
 /* representing the "multiplication by tau" in Fp[x]/(f) */
-static GEN
+GEN
 mod_transp(GEN tau,GEN v,GEN h,GEN f,GEN p)
 {
   /*pari_sp ltop = avma;*/
   GEN f_tilde = polrecip(f);
   long n = poldegree(f,0),degtau = degpol(tau),i;
-  /*GEN a = gtopolyrev(v,0);*/
   GEN a  = RgV_to_RgX(v,0);
   GEN b_tilde;
   if(degtau==n-1){
@@ -135,7 +136,7 @@ mod_transp(GEN tau,GEN v,GEN h,GEN f,GEN p)
 }
 
 /* 2m is the size of multiples */
-static ulong
+ulong
 rational_equ(GEN *Xp,GEN *multiples, ulong m,ulong ell, GEN fl,GEN *efl, GEN p)
 {
   pari_sp ltop = avma;
@@ -170,7 +171,7 @@ rational_equ(GEN *Xp,GEN *multiples, ulong m,ulong ell, GEN fl,GEN *efl, GEN p)
 
 
 
-static ulong
+ulong
 bsgs_abs(GEN a4,GEN a6,ulong ell,GEN fl,GEN p)
 {
   pari_sp av = avma;

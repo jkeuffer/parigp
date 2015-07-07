@@ -1,19 +1,10 @@
-/*
-#include "pari/pari.h"
-#include "pari/paripriv.h"
-*/
-static int
+#include "exhaustive_search.h"
+
+int
 FqX_equal(GEN x, GEN y) { return gequal(x,y); }
 
 
-struct eigen_ellinit
-{
-  GEN a4, h, T, p;
-  GEN RHS, DRHS, X12, Gr, nGr,O;
-  ulong pp;
-};
-
-static void
+void
 init_eigen(struct eigen_ellinit *Edat, GEN a4, GEN a6, GEN h,GEN T, GEN p)
 {
   pari_sp ltop = avma;
@@ -41,7 +32,7 @@ init_eigen(struct eigen_ellinit *Edat, GEN a4, GEN a6, GEN h,GEN T, GEN p)
 }
 
 
-static GEN
+GEN
 eigen_elldbl(void *E, GEN P)
 {
   pari_sp ltop = avma;
@@ -68,7 +59,7 @@ eigen_elldbl(void *E, GEN P)
  * An inversion is equivalent to 4M, so that this function requires about 7M
  * which is the same as with the method using ell-division polynomials
  * Working in mixed projective coordinates would require 11M */
-static GEN
+ GEN
 eigen_elladd(void *E, GEN P, GEN Q)
 {
   pari_sp ltop = avma;
@@ -99,7 +90,7 @@ eigen_elladd(void *E, GEN P, GEN Q)
 /*Finds the eigenvalue of the Frobenius given E, ell odd prime, h factor of the
  *ell-division polynomial, p and tr the possible values for the trace
  *(useful for primes with one root)*/
-static ulong
+ ulong
 find_eigen_value(GEN a4, GEN a6, ulong ell, GEN h, GEN p)
 { 
    pari_sp ltop = avma;

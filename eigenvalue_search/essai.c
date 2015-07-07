@@ -1,7 +1,6 @@
-#include <pari/pari.h>
-#include <pari/paripriv.h>
-#include "bsgs.c"
-#include "exhaustive_search.c"
+#include "bsgs.h"
+#include "exhaustive_search.h"
+#include "vp_mms.h"
 
 int 
 main()
@@ -23,6 +22,8 @@ main()
   pari_printf("( bsgs    search) ell = %lu , eigenvalue = %lu (time = %ldms) \n",ell,t,timer_delay(&T)); 
   t = find_eigen_value(a4,a6,ell,fl,p);
   pari_printf("(exhaust  search) ell = %lu , eigenvalue = %lu (time = %ldms) \n",ell,t,timer_delay(&T));
+  t =find_eigenvalue(a4,a6,ell,fl,p);
+  pari_printf("(   mms   search) ell = %lu , eigenvalue = %lu (time = %ldms) \n",ell,t,timer_delay(&T));
   }
 
   pari_close();  
